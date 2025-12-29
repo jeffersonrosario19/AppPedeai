@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNAB – Santarém Novo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --azul:#0d2b63;
+  --azul-claro:#1e88e5;
+  --verde:#0a7d3b;
+  --verde-hover:#075c2c;
+  --amarelo:#ffcc00;
+  --cinza-bg:#f4f6fa;
+  --cinza-texto:#333;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:var(--cinza-bg);
+  color:var(--cinza-texto);
+}
+
+.container{
+  width: 100%;
+  margin:auto;
+  padding:24px;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#0d2b63,#1e88e5);
+  border-radius:20px;
+  padding:40px 25px;
+  text-align:center;
+  color:#fff;
+}
+
+header img{
+  max-width:240px;
+  margin-bottom:15px;
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+  font-weight:700;
+}
+
+header h2{
+  margin:6px 0;
+  font-size:18px;
+  font-weight:500;
+}
+
+/* AVISO */
+.aviso{
+  background:var(--amarelo);
+  border-radius:16px;
+  padding:22px;
+  margin:30px 0;
+  text-align:center;
+  font-weight:600;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+/* GRID */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+}
+
+.card h3{
+  margin-top:0;
+  color:var(--azul);
+}
+
+.card p,
+.card ul{
+  font-size:14px;
+  line-height:1.6;
+  max-height:140px;
+  overflow-y:auto;
+  margin-bottom:14px;
+}
+
+.card ul{padding-left:18px;}
+
+/* BOTÕES */
+.botao{
+  display:block;
+  background:var(--verde);
+  color:#fff;
+  padding:14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  text-align:center;
+  margin-top:auto;
+  border:none;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.botao:hover{background:var(--verde-hover);}
+
+.botao.azul{
+  background:var(--azul-claro);
+}
+.botao.azul:hover{
+  background:#1565c0;
+}
+
+/* CONTATO */
+.link-contato{
+  display:block;
+  text-decoration:none;
+  padding:14px;
+  border-radius:12px;
+  transition:.3s;
+}
+
+.link-contato.whatsapp{
+  background:#e7f6ec;
+  color:#1b5e20;
+  border:1px solid #81c784;
+}
+
+.link-contato.whatsapp:hover{
+  background:#c8e6c9;
+}
+
+/* FOOTER */
+footer{
+  margin-top:50px;
+  background:var(--azul);
+  color:#fff;
+  text-align:center;
+  padding:30px 20px;
+  border-radius:18px;
+  font-size:14px;
+}
+
+footer img{
+  max-height:55px;
+  margin:8px;
+}
+
+/* MODAL */
+#modalEdital{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:9999;
+}
+
+#modalEdital .conteudo{
+  background:#fff;
+  width:92%;
+  max-width:900px;
+  height:85%;
+  margin:40px auto;
+  border-radius:18px;
+  padding:25px;
+  overflow-y:auto;
+  position:relative;
+}
+
+#modalEdital button{
+  position:absolute;
+  top:15px;
+  right:15px;
+  background:#c62828;
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+@media(max-width:600px){
+  header h1{font-size:22px;}
+  header h2{font-size:15px;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <img src="logo_pnab.png" alt="Logo PNAB">
+  <h1>Prefeitura Municipal de Santarém Novo – PA</h1>
+  <h2>Secretaria Municipal de Cultura – SECULT</h2>
+  <h2>Política Nacional Aldir Blanc – PNAB</h2>
+</header>
+
+<div class="aviso">
+  📅 <strong>Período de Inscrição</strong><br>
+  16 de dezembro de 2025 a 04 de janeiro de 2026<br>
+  ⚠️ Inscrições fora do prazo não serão aceitas
+</div>
+
+<div class="cards">
+
+  <div class="card">
+    <h3>📘 Sobre o Edital</h3>
+    <p>
+      A Política Nacional Aldir Blanc (PNAB) é uma política pública de
+      fomento à cultura destinada a apoiar artistas, grupos, coletivos
+      e espaços culturais do município.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👥 Quem Pode Participar</h3>
+    <ul>
+      <li>Artistas e fazedores de cultura</li>
+      <li>Produtores culturais</li>
+      <li>Grupos e coletivos culturais</li>
+      <li>Espaços culturais</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>📄 Edital e Documentos</h3>
+    <button class="botao" onclick="abrirEdital()">📖 Ler Edital</button>
+    <a class="botao azul"
+       href="https://drive.google.com/drive/folders/1fcWfXSVcXDOk1nd_N0NXqFnikXmFvpJh"
+       target="_blank">
+       📂 Anexos e Formulários
+    </a>
+  </div>
+
+  <div class="card">
+    <h3>✉️ Contato</h3>
+    <p><strong>E-mail:</strong><br>
+    aldirblancsantaremnovo@gmail.com</p>
+
+    <a href="https://wa.me/5591980499217"
+       target="_blank"
+       class="link-contato whatsapp">
+       📱 WhatsApp: (91) 98049-9217
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <img src="https://via.placeholder.com/140x60?text=Prefeitura">
+  <img src="https://via.placeholder.com/140x60?text=SECULT">
+  <img src="https://via.placeholder.com/140x60?text=PNAB">
+  <img src="https://via.placeholder.com/140x60?text=MinC">
+  <p>
+    Prefeitura Municipal de Santarém Novo<br>
+    Secretaria Municipal de Cultura – SECULT<br><br>
+    Política Nacional Aldir Blanc – PNAB<br>
+    Ministério da Cultura | Governo Federal
+  </p>
+</footer>
+
+</div>
+
+<!-- MODAL -->
+<div id="modalEdital">
+  <div class="conteudo">
+    <button onclick="fecharEdital()">✖ Fechar</button>
+    <h1>EDITAL DE CHAMAMENTO PÚBLICO Nº 01/2025 – SECULT-PMSN</h1>
+  <h3>Premiação para Agentes Culturais – Política Nacional Aldir Blanc (PNAB)</h3>
+
+  <hr>
+
+  <h2>1. Política Nacional Aldir Blanc de Fomento à Cultura</h2>
+  <p>
+    A Lei nº 14.399/2022 institui a Política Nacional Aldir Blanc de Fomento à Cultura (PNAB),
+    baseada na parceria entre União, Estados, Distrito Federal e Municípios com a sociedade
+    civil, promovendo diversidade, democratização e universalização do acesso à cultura.
+  </p>
+  <p>
+    O presente edital destina-se a premiar agentes culturais atuantes no Município de
+    Santarém Novo – PA, conforme legislação vigente.
+  </p>
+
+  <h2>2. Informações Gerais</h2>
+
+  <h3>2.1 Objeto do Edital</h3>
+  <p>
+    Premiação de agentes culturais que tenham prestado relevante contribuição ao
+    desenvolvimento artístico ou cultural do Município de Santarém Novo.
+  </p>
+  <p>
+    O prêmio possui natureza jurídica de doação sem encargo, sem exigência de contrapartida
+    ou prestação de contas.
+  </p>
+
+  <h3>2.2 Quantidade de Premiações</h3>
+  <table border="1" width="100%" cellspacing="0" cellpadding="8">
+    <tr>
+      <th>Categoria</th>
+      <th>Quantidade</th>
+      <th>Valor Unitário</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>PF / MEI</td>
+      <td>7</td>
+      <td>R$ 3.070,48</td>
+      <td>R$ 21.493,36</td>
+    </tr>
+    <tr>
+      <td>Grupos / Coletivos</td>
+      <td>4</td>
+      <td>R$ 5.373,35</td>
+      <td>R$ 21.493,40</td>
+    </tr>
+    <tr>
+      <td>Pessoa Jurídica</td>
+      <td>1</td>
+      <td>R$ 10.000,00</td>
+      <td>R$ 10.000,00</td>
+    </tr>
+  </table>
+
+  <p><strong>Valor total do edital:</strong> R$ 52.986,76</p>
+
+  <h3>2.4 Prazo de Inscrição</h3>
+  <p>
+    De <strong>16/12/2025</strong> até <strong>04/01/2026</strong>, até às 23h59.
+  </p>
+
+  <h3>2.5 Quem Pode Participar</h3>
+  <ul>
+    <li>Pessoa Física ou MEI</li>
+    <li>Pessoa Jurídica sem fins lucrativos</li>
+    <li>Grupos ou Coletivos sem CNPJ</li>
+  </ul>
+
+  <h3>2.6 Quem Não Pode Participar</h3>
+  <ul>
+    <li>Envolvidos na elaboração ou julgamento do edital</li>
+    <li>Parentes de servidores envolvidos (até 3º grau)</li>
+    <li>Agentes políticos e membros do Judiciário</li>
+  </ul>
+
+  <h2>3. Etapas do Edital</h2>
+  <ul>
+    <li>Inscrições</li>
+    <li>Seleção</li>
+    <li>Habilitação</li>
+    <li>Assinatura do Termo de Premiação</li>
+  </ul>
+
+  <h2>4. Inscrições</h2>
+  <p>
+    As inscrições deverão ser realizadas exclusivamente pelo e-mail:
+    <strong>aldirblancsantaremnovo@gmail.com</strong>
+  </p>
+
+  <h2>5. Cotas</h2>
+  <p>
+    Ficam garantidas cotas de 20%, sendo:
+  </p>
+  <ul>
+    <li>10% para pessoas negras (pretas e pardas) e indígenas</li>
+    <li>10% para mulheres cis</li>
+  </ul>
+
+  <h2>6. Seleção</h2>
+  <p>
+    A seleção será realizada por comissão nomeada por decreto municipal,
+    considerando a trajetória cultural e relevância social do agente cultural.
+  </p>
+
+  <h2>7. Remanejamento de Vagas</h2>
+  <p>
+    Caso não sejam preenchidas todas as vagas, os recursos poderão ser remanejados
+    conforme critérios estabelecidos neste edital.
+  </p>
+
+  <h2>8. Habilitação</h2>
+  <p>
+    Os agentes selecionados deverão apresentar documentação conforme sua categoria,
+    no prazo de até 10 dias após a publicação do resultado.
+  </p>
+
+  <h2>9. Assinatura do Termo de Premiação</h2>
+  <p>
+    O agente cultural contemplado será convocado para assinatura do Termo de Premiação
+    Cultural e posterior pagamento.
+  </p>
+
+  <h2>10. Disposições Finais</h2>
+  <p>
+    O acompanhamento do edital é de inteira responsabilidade dos agentes culturais.
+  </p>
+
+  <h3>Anexos</h3>
+  <ul>
+    <li>Anexo I – Formulário de Inscrição</li>
+    <li>Anexo II – Critérios de Seleção</li>
+    <li>Anexo III – Declaração de Representação</li>
+    <li>Anexo IV – Termo de Premiação</li>
+    <li>Anexo V – Autodeclaração Étnico-racial</li>
+    <li>Anexo VI – Pessoa com Deficiência</li>
+    <li>Anexo VII – Formulário de Recurso</li>
+  </ul>
+  </div>
+</div>
+
+<script>
+function abrirEdital(){
+  document.getElementById("modalEdital").style.display="block";
+}
+function fecharEdital(){
+  document.getElementById("modalEdital").style.display="none";
+}
+</script>
+
+</body>
+</html>
