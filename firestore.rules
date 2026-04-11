@@ -1,0 +1,120 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function profilePath(uid) {
+      return /databases/$(database)/documents/colaboradores/$(uid);
+    }
+
+    function bootstrapPath() {
+      return /databases/$(database)/documents/app_meta/bootstrap;
+    }
+
+    function bootstrapExists() {
+      return exists(bootstrapPath());
+    }
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function hasProfile(uid) {
+      return signedIn() && exists(profilePath(uid));
+    }
+
+    function profileAccessLevel(uid) {
+      return hasProfile(uid) ? get(profilePath(uid)).data.accessLevel : "";
+    }
+
+    function profileStatus(uid) {
+      return hasProfile(uid) ? get(profilePath(uid)).data.status : "";
+    }
+
+    function isManager() {
+      return signedIn() && (
+        request.auth.token.admin == true ||
+        (
+          profileStatus(request.auth.uid) == "Ativo" &&
+          profileAccessLevel(request.auth.uid) in ["Administrador", "Gerente"]
+        )
+      );
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isValidProfilePayload() {
+      return request.resource.data.nome is string
+        && request.resource.data.email is string
+        && request.resource.data.telefone is string
+        && request.resource.data.cargo is string
+        && request.resource.data.accessLevel is string
+        && request.resource.data.status in ["Ativo", "Inativo"];
+    }
+
+    match /app_meta/bootstrap {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+        && !bootstrapExists()
+        && request.resource.data.hasCollaborators == true
+        && request.resource.data.firstUserUid == request.auth.uid;
+
+      allow update, delete: if isAdmin();
+    }
+
+    match /colaboradores/{uid} {
+      allow read: if isOwner(uid) || isManager();
+
+      allow create: if isManager()
+        && request.resource.data.uid == uid
+        && isValidProfilePayload()
+      || isOwner(uid)
+        && request.resource.data.uid == uid
+        && request.auth.token.email == request.resource.data.email
+        && (
+          !bootstrapExists()
+            ? request.resource.data.accessLevel == "Gerente"
+              && request.resource.data.status == "Ativo"
+            : request.resource.data.accessLevel == "Atendimento"
+              && request.resource.data.status == "Ativo"
+        )
+        && isValidProfilePayload();
+
+      allow update: if isManager()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.email == resource.data.email
+        && isValidProfilePayload()
+      || isOwner(uid)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.accessLevel == resource.data.accessLevel
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.nome is string
+        && request.resource.data.telefone is string
+        && request.resource.data.cargo is string;
+
+      allow delete: if isManager();
+    }
+
+    match /produtos/{productId} {
+      allow read: if signedIn();
+      allow create, update, delete: if isManager();
+    }
+
+    match /pedidos/{orderId} {
+      allow read: if signedIn();
+      allow create: if signedIn();
+      allow update, delete: if isManager();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

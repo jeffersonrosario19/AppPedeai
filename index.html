@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>App Pede ai</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<section class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="login-brand-icon">
+        <span class="material-icons">storefront</span>
+      </span>
+      <div>
+        <p class="login-kicker">webapp Pede aí</p>
+        <h1>Acesso</h1>
+      </div>
+    </div>
+
+    <form class="login-form" id="loginForm">
+      <label for="loginUser">E-mail</label>
+      <div class="input-with-icon">
+        <span class="material-icons input-leading-icon">mail</span>
+        <input id="loginUser" type="email" placeholder="Digite seu e-mail" autocomplete="username">
+      </div>
+
+      <label for="loginPassword">Senha</label>
+      <div class="input-with-action">
+        <span class="material-icons input-leading-icon">lock</span>
+        <input id="loginPassword" type="password" placeholder="Digite sua senha" autocomplete="current-password">
+        <button
+          id="loginPasswordToggle"
+          class="input-action-btn"
+          type="button"
+          aria-label="Mostrar senha"
+          onclick="togglePasswordVisibility('loginPassword', this)"
+        >
+          <span class="material-icons">visibility</span>
+        </button>
+      </div>
+
+      <button class="btn btn-submit" type="submit">Entrar</button>
+
+      <p class="login-error" id="loginError"></p>
+    </form>
+  </div>
+</section>
+
+<div class="app-shell" id="appShell">
+  <div class="topbar">
+    <div class="top-left">
+      <span class="material-icons icon-btn" onclick="toggleMenu()">menu</span>
+    </div>
+
+    <div class="top-center">
+      App Pede aí
+    </div>
+
+    <div class="top-right">
+      <span class="material-icons icon-btn" onclick="logout()" title="Sair">logout</span>
+    </div>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <div>
+      <div class="menu-item" onclick="setActive(this); loadPage('atendimento')">
+        <div class="left">
+          <span class="material-icons">support_agent</span>
+          Atendimento
+        </div>
+      </div>
+
+      <div class="menu-item" onclick="setActive(this); loadPage('cardapio')">
+        <div class="left">
+          <span class="material-icons">restaurant_menu</span>
+          Cardápio
+        </div>
+      </div>
+
+      <div class="menu-item" onclick="setActive(this); loadPage('historico')">
+        <div class="left">
+          <span class="material-icons">receipt_long</span>
+          Histórico
+        </div>
+      </div>
+
+      <div class="menu-item" onclick="setActive(this); loadPage('mesas')">
+        <div class="left">
+          <span class="material-icons">table_restaurant</span>
+          Mesas
+        </div>
+      </div>
+
+      <div class="menu-item" onclick="toggleSubmenu()">
+        <div class="left">
+          <span class="material-icons">settings</span>
+          Configurações
+        </div>
+        <span class="material-icons" id="arrow">expand_more</span>
+      </div>
+
+      <div class="submenu" id="submenuConfig">
+        <a onclick="loadPage('colaboradores')">
+          <span class="material-icons">group</span> Colaboradores
+        </a>
+        <a onclick="loadPage('empresa')">
+          <span class="material-icons">store</span> Estabelecimento
+        </a>
+        <a onclick="loadPage('horario')">
+          <span class="material-icons">schedule</span> Horário
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer" id="sidebarUserCard">
+      <strong id="sidebarUserName">Nenhum usuário conectado</strong>
+      <span id="sidebarUserStatus">Aguardando autenticação</span>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<main class="content" id="content">
+  <h2>Bem-vindo</h2>
+</main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="firebase.js"></script>
+<script src="js/app.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/history.js"></script>
+<script src="js/staff.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>
