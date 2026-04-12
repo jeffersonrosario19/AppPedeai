@@ -328,6 +328,7 @@ textarea:focus {
   margin-top: 60px;
   padding: 24px;
   min-height: calc(100vh - 60px);
+  box-sizing: border-box;
   transition: margin-left 0.3s ease;
 }
 
@@ -412,10 +413,11 @@ textarea:focus {
 .staff-card {
   display: grid;
   gap: 14px;
-  background: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(241, 245, 249, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.22);
   padding: 16px;
   border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 }
 
 .staff-card-top {
@@ -470,6 +472,11 @@ textarea:focus {
 
 .staff-btn {
   width: fit-content;
+}
+
+.staff-card-actions {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .user-form {
@@ -550,6 +557,7 @@ textarea:focus {
 }
 
 .service-page-full {
+  width: 100%;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -577,6 +585,14 @@ textarea:focus {
 .service-page-full .service-catalog {
   width: 100%;
   min-width: 0;
+}
+
+.service-page-full .service-header {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.service-page-full .service-toolbar {
+  justify-content: flex-start;
 }
 
 .service-header {
@@ -607,11 +623,6 @@ textarea:focus {
   justify-content: start;
 }
 
-.service-page-full .service-grid {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  justify-content: stretch;
-}
-
 .service-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(241, 245, 249, 0.96));
   border: 1px solid rgba(148, 163, 184, 0.18);
@@ -620,6 +631,22 @@ textarea:focus {
   display: grid;
   grid-template-rows: var(--catalog-image-height) 1fr;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.service-card-clickable {
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.service-card-clickable:hover {
+  transform: translateY(-2px);
+  border-color: rgba(3, 105, 161, 0.3);
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
+}
+
+.service-card-clickable:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.28);
+  outline-offset: 2px;
 }
 
 .service-card-image {
@@ -1104,6 +1131,31 @@ textarea:focus {
   color: #16a34a;
 }
 
+.confirm-dialog .dialog-shell {
+  max-width: 420px;
+}
+
+.confirm-dialog[open] {
+  width: min(100%, 460px);
+  margin: auto;
+  padding: 0;
+}
+
+.confirm-dialog-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.confirm-dialog-icon {
+  font-size: 34px;
+  color: #d97706;
+}
+
+.confirm-dialog-content p {
+  color: #475569;
+}
+
 .order-feedback-content strong {
   display: block;
   color: #0f172a;
@@ -1157,12 +1209,21 @@ textarea:focus {
   gap: 20px;
 }
 
+.catalog-page .card {
+  margin-top: 0;
+}
+
+.staff-page .card {
+  margin-top: 0;
+}
+
 .catalog-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .catalog-header p {
@@ -1173,7 +1234,7 @@ textarea:focus {
 .catalog-header-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 12px;
 }
 
@@ -1186,6 +1247,10 @@ textarea:focus {
   border: 1px solid #dbe4f0;
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.search-field-wide {
+  width: min(100%, 420px);
 }
 
 .search-field span {
@@ -1276,6 +1341,18 @@ textarea:focus {
   min-width: 92px;
   padding: 9px 12px;
   font-size: 13px;
+}
+
+@media (min-width: 769px) {
+  .product-footer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-footer .btn {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .item-dialog {
@@ -1568,12 +1645,13 @@ body.profile-onboarding .overlay {
   }
 
   .product-footer {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   .product-footer .btn {
-    width: auto;
+    width: 100%;
+    min-width: 0;
   }
 
   .catalog-grid {
@@ -1908,6 +1986,6 @@ body.profile-onboarding .overlay {
   }
 
   .service-page-full .service-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
