@@ -1,0 +1,80 @@
+<form class="card user-form" id="user-form" onsubmit="event.preventDefault(); saveStaffFromForm();">
+  <div class="user-form-header">
+    <div>
+      <p class="user-form-kicker">Equipe</p>
+      <h3 id="userFormTitle">Novo colaborador</h3>
+    </div>
+    <span class="material-icons user-form-icon">badge</span>
+  </div>
+
+  <input id="staffDocumentId" type="hidden">
+
+  <div class="dialog-grid user-form-grid">
+    <div class="form-field">
+      <label for="staffNome">Nome completo</label>
+      <input id="staffNome" type="text" placeholder="Nome do colaborador">
+    </div>
+
+    <div class="form-field">
+      <label for="staffTelefone">Telefone</label>
+      <input id="staffTelefone" type="tel" placeholder="(91) 99999-9999" autocomplete="tel" maxlength="15">
+    </div>
+  </div>
+
+  <div class="dialog-grid user-form-grid">
+    <div class="form-field">
+      <label for="staffCargo">Cargo</label>
+      <input id="staffCargo" type="text" placeholder="Cargo atual">
+    </div>
+
+    <div class="form-field">
+      <label for="staffStatus">Status</label>
+      <select id="staffStatus" class="form-select">
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="dialog-grid user-form-grid">
+    <div class="form-field">
+      <label for="staffEmail">E-mail de acesso</label>
+      <input id="staffEmail" type="email" placeholder="email de acesso" autocomplete="email">
+    </div>
+
+    <div class="form-field" id="staffPasswordField">
+      <label for="staffPassword">Senha inicial</label>
+      <div class="input-with-action">
+        <input id="staffPassword" type="password" placeholder="Minimo de 6 caracteres" autocomplete="new-password">
+        <button
+          id="staffPasswordToggle"
+          class="input-action-btn"
+          type="button"
+          aria-label="Mostrar senha"
+          onclick="togglePasswordVisibility('staffPassword', this)"
+        >
+          <span class="material-icons">visibility</span>
+        </button>
+      </div>
+      <small class="field-hint" id="staffPasswordHint">Use a senha inicial apenas para novos colaboradores.</small>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="staffAccessLevel">Nivel de acesso ao sistema</label>
+    <select id="staffAccessLevel" class="form-select">
+      <option value="Administrador">Administrador</option>
+      <option value="Gerente">Gerente</option>
+      <option value="Atendimento">Atendimento</option>
+      <option value="Cozinha">Cozinha</option>
+      <option value="Financeiro">Financeiro</option>
+    </select>
+  </div>
+
+  <p class="user-form-feedback" id="staffFormFeedback"></p>
+
+  <div class="dialog-footer user-form-actions">
+    <button type="button" class="btn btn-dialog-secondary" onclick="resetStaffForm()">Limpar</button>
+    <button type="submit" class="btn btn-submit btn-dialog-primary" id="staffSubmitButton">Salvar colaborador</button>
+  </div>
+</form>

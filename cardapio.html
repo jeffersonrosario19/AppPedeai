@@ -1,0 +1,60 @@
+<section class="catalog-page">
+  <div class="card">
+    <div class="catalog-header">
+      <div class="catalog-header-actions">
+        <div class="search-field search-field-wide">
+          <span class="material-icons">search</span>
+          <input id="buscaProduto" type="search" placeholder="Buscar no cardápio" oninput="renderCardapio()">
+        </div>
+        <button class="btn btn-primary btn-action" onclick="openItemDialog()">
+          <span class="material-icons">add_circle</span>
+          <span>Novo Item</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="lista" class="catalog-grid"></div>
+  </div>
+</section>
+
+<dialog class="item-dialog" id="itemDialog">
+  <form method="dialog" class="dialog-shell" onsubmit="event.preventDefault(); saveItemFromDialog();">
+    <div class="dialog-header">
+      <h3 id="dialogTitle">Novo Cadastro</h3>
+      <button type="button" class="btn-icon-ghost" onclick="closeItemDialog()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="dialog-body">
+      <input id="itemIndex" type="hidden">
+
+      <div class="dialog-grid">
+        <div class="form-field">
+          <label for="itemNome">Nome do item</label>
+          <input id="itemNome" type="text" placeholder="Ex: X-Burger Especial">
+        </div>
+
+        <div class="form-field">
+          <label for="itemPreco">Preço (R$)</label>
+          <input id="itemPreco" type="text" placeholder="Ex: 29,90">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="itemDescricao">Descrição</label>
+        <textarea id="itemDescricao" rows="2" placeholder="Descreva o item do cardápio"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="itemImagem">Imagem do produto</label>
+        <input id="itemImagem" type="url" placeholder="Cole a URL da imagem">
+      </div>
+    </div>
+
+    <div class="dialog-footer">
+      <button type="button" class="btn btn-dialog-secondary" onclick="resetItemDialog()">Limpar campos</button>
+      <button type="submit" class="btn btn-submit btn-dialog-primary" id="dialogSubmitButton">Cadastrar</button>
+    </div>
+  </form>
+</dialog>

@@ -1,0 +1,75 @@
+<section class="table-page">
+  <div class="table-layout">
+    <div class="table-catalog card">
+      <div class="service-header">
+        <div>
+          <h2>Atendimento de Mesas</h2>
+          <p>Selecione os itens do pedido e vincule ao cliente e à mesa em atendimento.</p>
+        </div>
+        <div class="service-toolbar">
+          <div class="search-field search-field-wide">
+            <span class="material-icons">search</span>
+            <input id="tableServiceSearch" type="search" placeholder="Buscar item para a mesa" oninput="renderTableServiceCatalog()">
+          </div>
+        </div>
+      </div>
+
+      <div id="tableServiceCatalogList" class="service-grid"></div>
+    </div>
+
+    <aside class="table-order card">
+      <div class="service-order-header">
+        <div>
+          <h3>Novo Pedido da Mesa</h3>
+          <p>Informe os dados do atendimento e confira os itens antes de registrar.</p>
+        </div>
+        <div class="service-order-header-actions">
+          <span class="service-order-badge" id="tableOrderItemsCount">0 itens</span>
+        </div>
+      </div>
+
+      <div class="service-form">
+        <div class="service-form-grid">
+          <div class="form-field">
+            <label for="tableCustomerName">Cliente</label>
+            <input id="tableCustomerName" type="text" placeholder="Nome do cliente">
+          </div>
+
+          <div class="form-field">
+            <label for="tableNumber">Número da mesa</label>
+            <input id="tableNumber" type="text" placeholder="Ex: 12">
+          </div>
+        </div>
+
+        <div class="service-form-grid">
+          <div class="form-field">
+            <label for="tableCustomerContact">Contato</label>
+            <input id="tableCustomerContact" type="text" placeholder="Telefone ou referência">
+          </div>
+
+          <div class="form-field">
+            <label for="tableStatus">Status</label>
+            <input id="tableStatus" type="text" value="Em atendimento" readonly>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="tableOrderNotes">Observações</label>
+          <textarea id="tableOrderNotes" rows="3" placeholder="Ex: retirar talheres, aniversário, pedido dividido"></textarea>
+        </div>
+      </div>
+
+      <div class="service-order-list" id="currentTableOrderList"></div>
+
+      <div class="service-order-total">
+        <span>Total</span>
+        <strong id="currentTableOrderTotal">R$ 0,00</strong>
+      </div>
+
+      <div class="service-order-actions">
+        <button class="btn btn-dialog-secondary" type="button" onclick="confirmClearCurrentTableOrder()">Limpar pedido</button>
+        <button class="btn btn-submit btn-dialog-primary" type="button" onclick="registerTableOrder()">Registrar pedido</button>
+      </div>
+    </aside>
+  </div>
+</section>
