@@ -82,8 +82,8 @@ function renderAtendimentoCatalog() {
 
   list.innerHTML = filtered
     .map(
-      (item) => `
-        <article class="service-card">
+      (item, index) => `
+        <article class="service-card service-card-clickable" role="button" tabindex="0" onclick="handleAtendimentoCardClick(${index})" onkeydown="handleAtendimentoCardKey(event, ${index})">
           <img class="service-card-image" src="${escapeHtml(sanitizeImageSrc(item.imagem))}" alt="${escapeHtml(item.nome)}" onerror="this.onerror=null;this.src='${PRODUCT_IMAGE_FALLBACK}'">
           <div class="service-card-body">
             <h3>${escapeHtml(item.nome)}</h3>
@@ -96,4 +96,26 @@ function renderAtendimentoCatalog() {
       `
     )
     .join("");
+}
+
+function handleAtendimentoCardClick(index) {
+  const item = getItems()[index];
+  if (!item) {
+    return;
+  }
+
+  showAppConfirmDialog({
+    titleText: "Quantidade em breve",
+    messageText: `A seleção de quantidade para "${item.nome}" será adicionada nesta tela em seguida.`,
+    confirmLabel: "Fechar",
+    iconName: "shopping_cart",
+    onConfirm: () => {}
+  });
+}
+
+function handleAtendimentoCardKey(event, index) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    handleAtendimentoCardClick(index);
+  }
 }
