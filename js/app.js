@@ -3,7 +3,7 @@ const DEFAULT_PAGE = "atendimento";
 const ONBOARDING_PAGE = "primeiro-acesso";
 const ORDER_STORAGE_KEY = "pedidos";
 const STAFF_STORAGE_KEY = "colaboradores";
-const PRODUCT_IMAGE_FALLBACK = "assets/bolo-S.png";
+const PRODUCT_IMAGE_FALLBACK = "assets/lasanha.png";
 const AUTH_ERROR_MESSAGES = {
   "auth/invalid-email": "Digite um e-mail válido.",
   "auth/missing-password": "Digite sua senha.",
