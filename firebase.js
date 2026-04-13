@@ -219,6 +219,11 @@ function normalizeOrderSnapshot(doc) {
     status: data.status || "Registrado",
     criadoEm: data.criadoEm || "",
     criadoPorUid: data.criadoPorUid || "",
+    mesa: data.mesa || "",
+    tipoAtendimento: data.tipoAtendimento || "",
+    formaPagamento: data.formaPagamento || "",
+    valorRecebido: typeof data.valorRecebido === "number" ? data.valorRecebido : 0,
+    troco: typeof data.troco === "number" ? data.troco : 0,
     createdAt: data.createdAt || null
   };
 }
@@ -540,6 +545,11 @@ function createFirebaseOrderService() {
           status: order.status || "Registrado",
           criadoEm: order.criadoEm || "",
           criadoPorUid: order.criadoPorUid || "",
+          mesa: order.mesa || "",
+          tipoAtendimento: order.tipoAtendimento || "",
+          formaPagamento: order.formaPagamento || "",
+          valorRecebido: typeof order.valorRecebido === "number" ? order.valorRecebido : 0,
+          troco: typeof order.troco === "number" ? order.troco : 0,
           createdAt: now,
           updatedAt: now
         },
