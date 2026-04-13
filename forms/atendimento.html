@@ -1,17 +1,169 @@
-<section class="service-page service-page-full">
+<section class="service-page service-page-full atendimento-quick-page">
   <div class="service-catalog card">
     <div class="service-header">
+      <div class="quick-page-copy">
+        <span class="quick-page-kicker">Caixa rapido</span>
+        <h2>Atendimento Rápido</h2>
+        <p>Toque no item, escolha a quantidade e finalize o pagamento na sequência.</p>
+      </div>
       <div class="service-toolbar">
         <div class="search-field search-field-wide">
           <span class="material-icons">search</span>
-          <input id="atendimentoBusca" type="search" placeholder="Buscar item no atendimento" oninput="renderAtendimentoCatalog()">
+          <input id="atendimentoBusca" type="search" placeholder="Buscar item" oninput="renderAtendimentoCatalog()">
         </div>
-        <button class="btn btn-primary btn-action" type="button" title="Carrinho em breve">
-          <span class="material-icons">shopping_cart</span>
-          <span>Carrinho</span>
-        </button>
       </div>
     </div>
+
     <div id="serviceCatalogList" class="service-grid"></div>
   </div>
 </section>
+
+<div class="quick-checkout-bar" id="quickCheckoutBar" hidden>
+  <button class="quick-checkout-main" type="button" onclick="openAtendimentoSummaryDialog()">
+    <span class="quick-checkout-copy">
+      <strong id="quickCheckoutItemsCount">0 itens</strong>
+      <small id="quickCheckoutTotal">R$ 0,00</small>
+    </span>
+    <span class="quick-checkout-action">
+      Fechar conta
+      <span class="material-icons">arrow_forward</span>
+    </span>
+  </button>
+</div>
+
+<dialog class="item-dialog sheet-dialog compact-item-dialog" id="atendimentoItemDialog">
+  <div class="dialog-shell">
+    <div class="dialog-header compact-dialog-header">
+      <div class="compact-item-header-copy">
+        <div class="compact-item-title-row">
+          <h3 id="atendimentoItemName">Produto</h3>
+          <strong id="atendimentoItemPrice">R$ 0,00</strong>
+        </div>
+        <p id="atendimentoItemDescription">Descricao do produto.</p>
+      </div>
+      <button type="button" class="btn-icon-ghost" onclick="closeAtendimentoItemDialog()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="dialog-body compact-dialog-body">
+      <input id="atendimentoItemIndex" type="hidden">
+
+      <div class="compact-item-price-row">
+        <div class="compact-item-price-copy compact-item-price-copy-total">
+          <small>Total</small>
+          <span id="atendimentoItemSubtotal">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div class="compact-quantity-picker">
+        <button class="btn btn-qty quantity-icon-btn" type="button" onclick="adjustAtendimentoDialogQuantity(-1)">
+          <span class="material-icons">remove</span>
+        </button>
+        <input id="atendimentoItemQuantity" type="number" min="1" step="1" value="1" inputmode="numeric">
+        <button class="btn btn-qty quantity-icon-btn" type="button" onclick="adjustAtendimentoDialogQuantity(1)">
+          <span class="material-icons">add</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="dialog-footer compact-dialog-footer">
+      <button type="button" class="btn btn-submit btn-dialog-primary compact-dialog-submit" onclick="saveAtendimentoItemFromDialog()">Adicionar</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="item-dialog sheet-dialog compact-payment-dialog" id="atendimentoSummaryDialog">
+  <div class="dialog-shell">
+    <div class="dialog-header compact-dialog-header">
+      <div>
+        <h3>Resumo do pedido</h3>
+        <p>Confira os itens antes de seguir para o pagamento.</p>
+      </div>
+      <button type="button" class="btn-icon-ghost" onclick="closeAtendimentoSummaryDialog()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="dialog-body compact-dialog-body compact-payment-body">
+      <div class="compact-payment-topline">
+        <span class="compact-payment-chip">Pedido montado</span>
+      </div>
+      <div class="compact-order-summary" id="atendimentoPaymentSummary"></div>
+
+      <div class="compact-payment-total">
+        <span>Total</span>
+        <strong id="atendimentoPaymentTotal">R$ 0,00</strong>
+      </div>
+    </div>
+
+    <div class="dialog-footer compact-dialog-footer">
+      <button type="button" class="btn btn-dialog-secondary compact-secondary-btn" onclick="confirmClearCurrentAtendimentoOrder()">Limpar</button>
+      <button type="button" class="btn btn-submit btn-dialog-primary compact-dialog-submit" onclick="openAtendimentoPaymentDialog()">Seguir para pagamento</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="item-dialog sheet-dialog compact-payment-dialog" id="atendimentoPaymentDialog">
+  <div class="dialog-shell">
+    <div class="dialog-header compact-dialog-header">
+      <div>
+        <h3>Pagamento</h3>
+        <p>Escolha a forma de pagamento e finalize o pedido.</p>
+      </div>
+      <button type="button" class="btn-icon-ghost" onclick="closeAtendimentoPaymentDialog()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <div class="dialog-body compact-dialog-body compact-payment-body">
+      <div class="compact-payment-topline">
+        <span class="compact-payment-chip">Pedido pronto para cobrar</span>
+      </div>
+
+      <div class="compact-payment-methods">
+        <button type="button" class="compact-payment-method is-active" id="paymentMethodPix" onclick="selectAtendimentoPaymentMethod('Pix')">Pix</button>
+        <button type="button" class="compact-payment-method" id="paymentMethodCartao" onclick="selectAtendimentoPaymentMethod('Cartao')">Cartão</button>
+        <button type="button" class="compact-payment-method" id="paymentMethodDinheiro" onclick="selectAtendimentoPaymentMethod('Dinheiro')">Dinheiro</button>
+      </div>
+
+      <div class="compact-cash-fields" id="atendimentoCashFields" hidden>
+        <div class="form-field">
+          <label for="atendimentoCashReceived">Valor recebido</label>
+          <input id="atendimentoCashReceived" type="text" inputmode="decimal" placeholder="0,00">
+        </div>
+
+        <div class="compact-change-box">
+          <span>Troco</span>
+          <strong id="atendimentoChangeAmount">R$ 0,00</strong>
+        </div>
+      </div>
+
+      <div class="compact-payment-total">
+        <span>Total</span>
+        <strong id="atendimentoPaymentStepTotal">R$ 0,00</strong>
+      </div>
+    </div>
+
+    <div class="dialog-footer compact-dialog-footer">
+      <button type="button" class="btn btn-dialog-secondary compact-secondary-btn" onclick="closeAtendimentoPaymentDialog()">Voltar</button>
+      <button type="button" class="btn btn-submit btn-dialog-primary compact-dialog-submit" onclick="registerAtendimentoOrder()">Finalizar</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="item-dialog compact-action-dialog" id="atendimentoSummaryItemDialog">
+  <div class="dialog-shell">
+    <div class="dialog-body compact-action-dialog-body">
+      <div class="compact-action-dialog-copy">
+        <strong id="atendimentoSummaryItemTitle">Item do pedido</strong>
+        <span id="atendimentoSummaryItemMeta">1x item</span>
+      </div>
+      <div class="compact-action-dialog-actions">
+        <button type="button" class="btn btn-dialog-secondary compact-order-action-btn" onclick="closeAtendimentoSummaryItemDialog()">Fechar</button>
+        <button type="button" class="btn btn-card-secondary compact-order-action-btn" onclick="editSelectedAtendimentoSummaryItem()">Editar</button>
+        <button type="button" class="btn btn-card-danger compact-order-action-btn" onclick="removeSelectedAtendimentoSummaryItem()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</dialog>
