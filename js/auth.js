@@ -138,6 +138,15 @@ function getAuthErrorMessage(error) {
     return "Firebase Auth não está disponível.";
   }
 
+  const errorMessage = String(error?.message || "").toLowerCase();
+  if (
+    error?.code === "auth/network-request-failed"
+    || errorMessage.includes("internet_disconnected")
+    || errorMessage.includes("failed to fetch")
+  ) {
+    return "Sem conexão com a internet. Verifique sua rede e tente novamente.";
+  }
+
   return AUTH_ERROR_MESSAGES[error?.code] || "Não foi possível entrar. Verifique seus dados.";
 }
 
