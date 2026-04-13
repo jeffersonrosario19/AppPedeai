@@ -3,12 +3,13 @@ const DEFAULT_PAGE = "atendimento";
 const ONBOARDING_PAGE = "primeiro-acesso";
 const ORDER_STORAGE_KEY = "pedidos";
 const STAFF_STORAGE_KEY = "colaboradores";
-const PRODUCT_IMAGE_FALLBACK = "assets/lasanha.png";
+const PRODUCT_IMAGE_FALLBACK = "assets/bolo-S.png";
 const AUTH_ERROR_MESSAGES = {
   "auth/invalid-email": "Digite um e-mail válido.",
   "auth/missing-password": "Digite sua senha.",
   "auth/invalid-credential": "E-mail ou senha inválidos.",
   "auth/invalid-login-credentials": "E-mail ou senha inválidos.",
+  "auth/network-request-failed": "Sem conexão com a internet. Verifique sua rede e tente novamente.",
   "auth/user-not-found": "Usuário não encontrado.",
   "auth/wrong-password": "E-mail ou senha inválidos.",
   "auth/too-many-requests": "Muitas tentativas. Aguarde e tente novamente."
